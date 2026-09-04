@@ -1,14 +1,32 @@
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
+import type { Card, HandType } from "../types";
 
-function Game({ playerHand, computerHand, result, play, hands }) {
+type GameProps = {
+    playerHand: HandType | null;
+    computerHand: HandType | null;
+    result: string;
+    play: (player: HandType) => void;
+    hands: Card[];
+};
+
+function Game({
+    playerHand,
+    computerHand,
+    result,
+    play,
+    hands,
+}: GameProps) {
+    const computer = hands.find(
+        (hand) => hand.type === computerHand
+    );
     return (
         <div className="container min-vh-100 d-flex flex-column justify-content-center text-center">
             <div className="row justify-content-center align-items-center mb-5">
                 <div className="col-5 col-md-3">
                     <h2 className="h4">敵</h2>
                     <div className="display-1 my-3">
-                        {computerHand ? hands[computerHand] : "？"}
+                        {computer ? computer.name : "？"}
                     </div>
                 </div>
             </div>
@@ -27,9 +45,7 @@ function Game({ playerHand, computerHand, result, play, hands }) {
                                 <Popover>
                                     <Popover.Body>
                                         <div>
-                                            ただのグー
-                                            <br></br>
-                                            それ以上でも以下でもない
+                                            {playerHand}
                                         </div>
                                     </Popover.Body>
                                 </Popover>

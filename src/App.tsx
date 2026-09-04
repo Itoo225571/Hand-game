@@ -2,22 +2,51 @@ import { useState } from "react";
 import "./App.css";
 
 import Game from "./components/Game";
+import type { Card, HandType } from "./types";
 
-const hands = {
-    rock: "✊",
-    scissors: "✌️",
-    paper: "✋",
-};
+const handCards: Card[] = [
+    {
+        name: "ぐー",
+        type: "rock",
+        image: "rock.png",
+        description: "ただのグー。それ以上でも以下でもない。",
+        rarity: "N",
+    },
+    {
+        name: "ちょき",
+        type: "scissors",
+        image: "scissors.png",
+        description: "チョキ。",
+        rarity: "N",
+    },
+    {
+        name: "ぱー",
+        type: "paper",
+        image: "paper.png",
+        description: "パー。",
+        rarity: "N",
+    },
+];
 
 function App() {
-    const [playerHand, setPlayerHand] = useState(null);
-    const [computerHand, setComputerHand] = useState(null);
-    const [result, setResult] = useState("選べ！");
+    const [playerHand, setPlayerHand] =
+        useState<HandType | null>(null);
 
-    // playerが手を選択した後の動き
-    const play = (hand) => {
-        const choices = ["rock", "scissors", "paper"];
-        const computer = choices[Math.floor(Math.random() * choices.length)];
+    const [computerHand, setComputerHand] =
+        useState<HandType | null>(null);
+
+    const [result, setResult] =
+        useState<string>("じゃんけん…");
+
+    const play = (hand: HandType) => {
+        const choices: HandType[] = [
+            "rock",
+            "scissors",
+            "paper",
+        ];
+
+        const computer =
+            choices[Math.floor(Math.random() * choices.length)];
 
         setPlayerHand(hand);
         setComputerHand(computer);
@@ -41,7 +70,7 @@ function App() {
             computerHand={computerHand}
             result={result}
             play={play}
-            hands={hands}
+            hands={handCards}
         />
     );
 }
