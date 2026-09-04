@@ -1,0 +1,24 @@
+.hand-image {
+    width: 80%;
+    object-fit: contain;
+}
+
+.hand-card {
+    aspect-ratio: 4 / 5;
+
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+.hand-card .card-header {
+    background-color: transparent;
+    border: none;
+}
+
+.hand-button {
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+/* card-bodyを押している間 */
+.hand-card:has(.hand-button:active) {
+    transform: translateY(5px);
+}
